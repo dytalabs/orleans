@@ -3,6 +3,7 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+#pragma warning disable 1573
 
 namespace Orleans.Runtime
 {
@@ -16,7 +17,7 @@ namespace Orleans.Runtime
         private int completedLength;
         private readonly BufferPool pool;
 
-        // These arrays are all pre-allocated to avoid using BitConverter.GetBytes(), 
+        // These arrays are all pre-allocated to avoid using BitConverter.GetBytes(),
         // which allocates a byte array and thus has some perf overhead
         private readonly int[] tempIntArray = new int[1];
         private readonly uint[] tempUIntArray = new uint[1];
@@ -28,7 +29,7 @@ namespace Orleans.Runtime
         private readonly float[] tempFloatArray = new float[1];
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ByteArrayBuilder()
             : this(BufferPool.GlobalPool)
@@ -36,7 +37,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param Name="size"></param>
         private ByteArrayBuilder(BufferPool bufferPool)
@@ -131,10 +132,10 @@ namespace Orleans.Runtime
             // Big enough for its own buffer
             //
             // This is a somewhat debatable optimization:
-            // 1) If the passed array is bigger than bufferSize, don't copy it and append it as its own buffer. 
-            // 2) Make sure to ALWAYS copy arrays which size is EXACTLY bufferSize, otherwise if the data was passed as an Immutable arg, 
+            // 1) If the passed array is bigger than bufferSize, don't copy it and append it as its own buffer.
+            // 2) Make sure to ALWAYS copy arrays which size is EXACTLY bufferSize, otherwise if the data was passed as an Immutable arg,
             // we may return this buffer back to the BufferPool and later over-write it.
-            // 3) If we already have MINIMUM_BUFFER_SIZE in the current buffer and passed enough data, also skip the copy and append it as its own buffer. 
+            // 3) If we already have MINIMUM_BUFFER_SIZE in the current buffer and passed enough data, also skip the copy and append it as its own buffer.
             if (((arrLen != bufferSize) && (currentOffset > MINIMUM_BUFFER_SIZE) && (arrLen > MINIMUM_BUFFER_SIZE)) || (arrLen > bufferSize))
             {
                 Grow();
@@ -158,7 +159,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="b"></param>
         /// <returns></returns>
@@ -232,7 +233,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -242,7 +243,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -252,7 +253,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -262,7 +263,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -272,7 +273,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -282,7 +283,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -292,7 +293,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -302,7 +303,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -312,7 +313,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -322,7 +323,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
@@ -332,7 +333,7 @@ namespace Orleans.Runtime
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>

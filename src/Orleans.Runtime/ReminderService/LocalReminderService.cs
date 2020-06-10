@@ -190,7 +190,7 @@ namespace Orleans.Runtime.ReminderService
         private void RemoveOutOfRangeReminders()
         {
             var remindersOutOfRange = localReminders.Where(r => !RingRange.InRange(r.Key.GrainRef)).Select(r => r.Value).ToArray();
-            
+
             foreach (var reminder in remindersOutOfRange)
             {
                 if (logger.IsEnabled(LogLevel.Trace))
@@ -360,7 +360,7 @@ namespace Orleans.Runtime.ReminderService
                 } // foreach reminder read from table
 
                 int remindersCountBeforeRemove = localReminders.Count;
-                
+
                 // foreach reminder that is not in global table, but exists locally
                 foreach (var reminder in remindersNotInTable.Values)
                 {
@@ -428,7 +428,7 @@ namespace Orleans.Runtime.ReminderService
             switch (Status)
             {
                 case GrainServiceStatus.Booting:
-                    // if service didn't finish the initial load, it could still be loading normally or it might have already 
+                    // if service didn't finish the initial load, it could still be loading normally or it might have already
                     // failed a few attempts and callers should not be hold waiting for it to complete
                     var task = this.startedTask.Task;
                     if (task.IsCompleted)
@@ -490,7 +490,9 @@ namespace Orleans.Runtime.ReminderService
             private readonly LocalReminderService reminderService;
             private readonly IAsyncTimer timer;
 
+#pragma warning disable 649
             private ValueStopwatch stopwatch;
+#pragma warning restore 649
             private Task runTask;
 
             internal LocalReminderData(ReminderEntry entry, LocalReminderService reminderService)

@@ -7,7 +7,7 @@ namespace Orleans.Runtime
         TKey Key { get; }
         TService GetService(IServiceProvider services);
     }
-    
+
     /// <summary>
     /// Collection of services that can be disambiguated by key
     /// </summary>
@@ -27,7 +27,9 @@ namespace Orleans.Runtime
             where TService : class
         {
             IKeyedServiceCollection<TKey, TService> collection = (IKeyedServiceCollection<TKey, TService>) services.GetService(typeof(IKeyedServiceCollection<TKey, TService>));
-            return collection?.GetService(services, key);
+            var result = collection?.GetService(services, key);
+            Console.WriteLine($"*****************************{key}={result}");
+            return result;
         }
 
         /// <summary>

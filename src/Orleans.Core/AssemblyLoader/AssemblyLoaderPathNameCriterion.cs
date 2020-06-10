@@ -5,7 +5,9 @@ namespace Orleans.Runtime
 {
     internal class AssemblyLoaderPathNameCriterion : AssemblyLoaderCriterion
     {
+#pragma warning disable 109
         internal new delegate bool Predicate(string pathName, out IEnumerable<string> complaints);
+#pragma warning restore 109
 
         internal static AssemblyLoaderPathNameCriterion NewCriterion(Predicate predicate)
         {
